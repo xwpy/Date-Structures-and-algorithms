@@ -1,0 +1,58 @@
+import timeit
+
+#
+# li = []
+# for i in range(1000):
+# 		li += [i]
+#
+#
+# 第二种操作 列表生成器
+# li = [i for i in range(1000)]
+#
+# 第三种 通过list方法转换成列表
+# li = list(range(1000))
+#
+# 第四种 通过遍历range(n)，再向空列表中添加元素的方法
+# li = []
+# for i in range(1000):
+# 	li.append(i)
+import pprint
+import timeit
+
+def t1():
+	li = []
+	for i in range(10000):
+		li.append(i)
+
+def t2():
+	for i in range(1000):
+		li += [i]
+
+def t3():
+	[i for i in range(1000)]
+
+def t4():
+	li = list(range(1000))
+
+
+timer1 = timeit.timeit(stmt = t1, number = 1000)
+#pprint.pprint(timer1)
+print("append:", timer1)
+
+
+timeit的用法
+ timeit(stmt='pass', setup='pass', timer=<defaulttimer>, number=1000000)
+
+       返回：
+
+            返回执行stmt这段代码number遍所用的时间，单位为秒，float型
+
+       参数：
+
+            stmt：要执行的那段代码
+
+            setup：执行代码的准备工作，不计入时间，一般是import之类的
+
+            timer：这个在win32下是time.clock()，linux下是time.time()，默认的，不用管
+
+            number：要执行stmt多少遍
